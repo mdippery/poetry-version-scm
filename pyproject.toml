@@ -17,3 +17,6 @@ poetry = "^1.2"
 
 [tool.poetry.plugins."poetry.plugin"]
 version-scm = "poetry_version_scm.plugin:VersionScmPlugin"
+
+[tool.poetry_scm_version]
+use_scm_version = true
