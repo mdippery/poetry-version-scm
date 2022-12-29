@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "poetry-version-scm"
-version = "0.1.0.dev0"
+version = "0.0.0"
 description = "Infer package version from SCM tags"
 authors = ["Michael Dippery <michael@monkey-robot.com>"]
 license = "MIT"
