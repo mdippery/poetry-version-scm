@@ -14,12 +14,10 @@ class VersionScmPlugin(Plugin):
             return
 
         default_version = poetry.package.version
-        io.write_line(f"BEFORE: {default_version}")
         git = Git()
         has_tag, desc = git.describe()
         version = desc.lstrip("v") if has_tag else default_version
         poetry.package.version = version
-        io.write_line(f"AFTER: {poetry.package.version}")
 
     def config(self, poetry: Poetry, io: IO) -> dict[str, t.Any]:
         try:
