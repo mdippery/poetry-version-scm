@@ -12,10 +12,11 @@ class VersionScmPlugin(Plugin):
         if not self.config(poetry, io).get("use_scm_version", False):
             return
 
-        io.write_line(f"BEFORE: {poetry.package.version}")
+        default_version = poetry.package.version
+        io.write_line(f"BEFORE: {default_version}")
         git = Git()
         has_tag, desc = git.describe()
-        version = desc.lstrip("v") if has_tag else "0.0.0"
+        version = desc.lstrip("v") if has_tag else default_version
         poetry.package.version = version
         io.write_line(f"AFTER: {poetry.package.version}")
 
