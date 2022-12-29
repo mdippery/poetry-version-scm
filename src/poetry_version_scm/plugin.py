@@ -1,5 +1,6 @@
 import typing as t
 
+import tomlkit.exceptions
 from cleo.io.io import IO
 from poetry.plugins.plugin import Plugin
 from poetry.poetry import Poetry
@@ -21,6 +22,10 @@ class VersionScmPlugin(Plugin):
         io.write_line(f"AFTER: {poetry.package.version}")
 
     def config(self, poetry: Poetry, io: IO) -> dict[str, t.Any]:
-        tool = poetry.pyproject.data["tool"]
-        config = tool["poetry_scm_version"]
-        return config
+        try:
+            tool = poetry.pyproject.data["tool"]
+            config = tool["poetry_scm_version"]
+        except tomlkit.exceptions.NonExistentKey:
+            return {}
+        else:
+            return config
